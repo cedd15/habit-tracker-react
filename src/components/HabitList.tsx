@@ -1,19 +1,19 @@
+import type { Habit } from "../types/Habit";
+import { HabitItem } from "./HabitItem";
+
 export function HabitList() {
-    const habits = [
+    const habits : Habit[] = [
         {
             id: 1,
-            title: "Drink Water",
-            done: true
+            name: "Drink Water",
         },
         {
             id: 2,
-            title: "Exercise",
-            done: false
+            name: "Exercise",
         },
         {
             id: 3,
-            title: "Read a Book",
-            done: true
+            name: "Read a Book",
         }
     ];
 
@@ -23,10 +23,7 @@ export function HabitList() {
 
     return <div className="flex flex-col gap-3">
         {habits.map((habit) => (
-            <div key={habit.id} className="flex items-center gap-3 bg-zinc-800 rounded-lg px-4 py-3">
-                <input type="checkbox" checked={habit.done} />
-                <span className="text-zinc-300">{habit.title}</span>
-            </div>
+            <HabitItem key={habit.id} habit={habit} />
         ))}
     </div>
 }
