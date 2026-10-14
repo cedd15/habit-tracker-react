@@ -19,7 +19,7 @@ export function HabitItem({ habit }: HabitItemProps) {
                     <span className="font-medium">{habit.name}</span>
                     <span className="text-sm text-amber-400">Last done: 2 days ago</span>
                 </div>
-                <Button variant="danger">Delete</Button>
+                <Button variant="danger" className="text-sm">Delete</Button>
             </div>
             <div className="grid grid-cols-7 gap-1.5">
                 {visibleDates.map((date) => (
