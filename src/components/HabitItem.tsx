@@ -1,14 +1,15 @@
 import { eachDayOfInterval, endOfWeek, format, isFuture, isSameDay, startOfDay, startOfWeek, subDays } from "date-fns";
 import type { Habit } from "../types/Habit";
 import { Button } from "./Button";
+import { useHabits } from "../context/useHabits";
 
 type HabitItemProps = {
     habit: Habit;
-    onDeleteHabit: (id: string) => void;
-    onToggleHabitCompletion: (id: string, date: Date) => void;
 }
 
-export function HabitItem({ habit, onDeleteHabit, onToggleHabitCompletion }: HabitItemProps) {
+export function HabitItem({ habit }: HabitItemProps) {
+    const { deleteHabit, toggleHabitCompletion } = useHabits();
+
     const visibleDates = eachDayOfInterval({
         start: startOfWeek(new Date(), { weekStartsOn: 1 }),
         end: endOfWeek(new Date(), { weekStartsOn: 1 })
@@ -29,14 +30,14 @@ export function HabitItem({ habit, onDeleteHabit, onToggleHabitCompletion }: Hab
                         )
                     }
                 </div>
-                <Button variant="danger" className="text-sm" onClick={() => onDeleteHabit(habit.id)}>
+                <Button variant="danger" className="text-sm" onClick={() => deleteHabit(habit.id)}>
                     Delete
                 </Button>
             </div>
             <div className="grid grid-cols-7 gap-1.5">
                 {visibleDates.map((date) => (
                     <Button 
-                        onClick={() => onToggleHabitCompletion(habit.id, date)}
+                        onClick={() => toggleHabitCompletion(habit.id, date)}
                         key={date.toISOString()} 
                         disabled={isFuture(date)} 
                         variant={habit.completionDates?.some((d) => isSameDay(d, date)) ? "primary" : "secondary"}
