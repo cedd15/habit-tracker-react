@@ -1,4 +1,5 @@
 export interface Habit {
-    id: number;
+    id: string;
     name: string;
+    completionDates?: Date[];
 }
