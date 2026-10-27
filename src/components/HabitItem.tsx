@@ -21,9 +21,13 @@ export function HabitItem({ habit, onDeleteHabit, onToggleHabitCompletion }: Hab
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <span className="font-medium">{habit.name}</span>
-                    <span className="text-sm text-amber-400">
-                        Streak: {streak} {streak === 1 ? "day" : "days"}
-                    </span>
+                    {
+                        streak > 0 && (
+                            <span className="text-sm text-amber-400">
+                                Streak: {streak} {streak === 1 ? "day" : "days"}
+                            </span>
+                        )
+                    }
                 </div>
                 <Button variant="danger" className="text-sm" onClick={() => onDeleteHabit(habit.id)}>
                     Delete
