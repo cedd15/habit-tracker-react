@@ -1,7 +1,11 @@
 import { useHabits } from "../context/useHabits";
 import { HabitItem } from "./HabitItem";
 
-export function HabitList() {
+type HabitListProps = {
+    visibleDates: Date[];
+}
+
+export function HabitList({ visibleDates }: HabitListProps) {
     const { habits } = useHabits();
 
     if (habits.length === 0) {
@@ -13,6 +17,7 @@ export function HabitList() {
             <HabitItem 
                 key={habit.id} 
                 habit={habit} 
+                visibleDates={visibleDates}
             />
         ))}
     </div>
