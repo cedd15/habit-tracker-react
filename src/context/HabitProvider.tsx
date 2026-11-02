@@ -1,11 +1,11 @@
-import { useState } from "react";
 import type { Habit } from "../types/Habit";
 import { HabitContext } from "./useHabits";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 
 
 export function HabitProvider({ children }: { children: React.ReactNode }) {
-    const [habits, setHabits] = useState<Habit[]>([]);
+    const [habits, setHabits] = useLocalStorage<Habit[]>("Habits", []);
 
     function handleAddHabit(name: string) {
         const newHabit: Habit = {
